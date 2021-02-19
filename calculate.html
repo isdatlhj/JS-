@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> 계산기 </title>
+    <style>
+      #title {
+        border-bottom: 3px solid gray;
+        text-align:center;
+        padding:32px;
+        margin:0;
+        font-size:3.5em;
+        color:maroon;
+        background-color:orange;
+      }
+
+      #table_design {
+        border: 2px solid green;
+        margin-top:49px;
+        text-align:center;
+        border-collapse: collapse;
+      }
+      #display #result{
+        border-left: 0px solid gray;
+      }
+    </style>
+  </head>
+  <h1 id = "title"> 계산기 </h1>
+
+  <body>
+    <table border="1" align = "center" id = "table_design" width=444 height=600 >
+      <td colspan = "4" align="center">  계산기 </td>
+      <tr>
+        <td colspan="2" width="222" align="left" style="padding-left:10px;border-right-width:0px;
+        padding-right:0px;"> 값을 입력 >> </td>
+        <td colspan="2" width="222" align="right" style="padding-left:0px;border-left-width:0px;">
+            <input type = "text" id="display" style="border:0px;text-align:right;font-size:1em;">
+         </td>
+      </tr>
+      <tr>
+
+        <td colspan="2" width="222" align="left" style="padding-left:10px;border-right-width:0px;
+        padding-right:0px;"> 결과 >> </td>
+        <td colspan="2" width="222" align="right" style="padding-left:0px;border-left-width:0px;">
+            <input type = "text" id="result" style="border:0px;text-align:right;font-size:1em;">
+         </td>
+
+      </tr>
+      <tr>
+        <td width="111" onclick = "add(1)" > 1 </td>
+        <td width="111" onclick = "add(2)" > 2 </td>
+        <td width="111" onclick = "add(3)" > 3 </td>
+        <td width="111" onclick = "add('+')" > + </td>
+      </tr>
+      <tr>
+        <td onclick = "add(4)" > 4 </td>
+        <td onclick = "add(5)" > 5 </td>
+        <td onclick = "add(6)" > 6 </td>
+        <td onclick = "add('-')" > - </td>
+      </tr>
+      <tr>
+        <td onclick = "add(7)" > 7 </td>
+        <td onclick = "add(8)" > 8 </td>
+        <td onclick = "add(9)" > 9 </td>
+        <td onclick = "add('*')" > * </td>
+      </tr>
+      <tr>
+        <td onclick = "add(0)" > 0 </td>
+        <td onclick = "clearing()" > C </td>
+        <td onclick = "getResC()" > = </td>
+        <td onclick = "add('/')" > / </td>
+      </tr>
+    </table>
+
+    <script>
+      function add(char) {
+        var display = document.getElementById('display');
+        display.value = display.value + char;
+      }
+
+      function clearing() {
+        var display = document.getElementById('display');
+        var result = document.getElementById('result');
+        display.value = "";
+        result.value = "";
+      }
+      function getResC() {
+        var display = document.getElementById('display');
+        var result = document.getElementById('result');
+
+        if(strCheck(display.value)) {
+          result.value = eval(display.value);
+        }
+        else {
+          result.value = "WrongInput";
+        }
+      }
+
+      function strCheck(str1){
+        var temp;
+        var i=0;
+        var check=0;
+
+        if(str1.length === 0) {
+          return false;
+        }
+        else if(str1.charAt(0) === '1' || str1.charAt(0) === '2' || str1.charAt(0) === '3' || str1.charAt(0) === '4' || str1.charAt(0) === '5' || str1.charAt(0) === '6' || str1.charAt(0) === '7' || str1.charAt(0) === '8' || str1.charAt(0) === '9' || str1.charAt(0) === '0') {
+          for(i=0;i<str1.length-1;i++) {
+            temp = str1.charAt(i);
+            if(temp === '-' || temp ===
+             '+' || temp === '*' || temp === '/') {
+                temp = str1.charAt(i+1);
+                if(temp === '-' || temp ==='+' || temp ==='*' || temp === '*') {
+                  check = 1;
+                  break;
+                }
+            }
+          }
+            if(check === 1 ) {
+              return false;
+            }
+            else {
+              if(str1.charAt(str1.length - 1) === '-' || str1.charAt(str1.length - 1) === '/' || str1.charAt(str1.length - 1) === '*' || str1.charAt(str1.length - 1) === '+') {
+                return false;
+              }
+
+              return true;
+            }
+
+        }
+        else {
+          return false;
+        }
+      }
+    </script>
+
+    <p align="center" style="padding:30px">
+      <a href = "index.nginx-debian.html"> 돌아가기 </a>
+    </p>
+  </body>
+</html>
